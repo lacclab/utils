@@ -57,10 +57,7 @@ echo "Conda is installed at: ${conda_path}"
 # Print the path where conda is installed
 echo "Conda path: $conda_path"
 
-# Copy template_zshrc to .zshrc
-cp template_zshrc ~/.zshrc
-# Replace "user" with the current user
-sed -i "s/<user>/$(whoami)/g" ~/.zshrc
+
 
 ###### Install zsh plugins
 
@@ -77,8 +74,13 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
+# Copy template_zshrc to .zshrc
+cp server_sync/template_zshrc ~/.zshrc
+# Replace "user" with the current user
+sed -i "s/<user>/$(whoami)/g" ~/.zshrc
+
 # copy template_p10k_config to .p10k.zsh
-cp template_p10k_config ~/.p10k.zsh
+cp server_sync/template_p10k_config ~/.p10k.zsh
 
 source ~/.zshrc
 
