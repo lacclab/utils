@@ -12,7 +12,7 @@
 # ./setup_new_server.sh https://github.com/lacclab/Cognitive-State-Decoding.git --env-file my_env.yml
 
 # Exit if any command fails
-set -e
+# set -e
 
 # Default values
 repo_path="https://github.com/user/repo.git"
@@ -60,15 +60,7 @@ else
   echo "Failed to clone repository: $repo_path"
   exit 1
 fi
-
 # Create a conda environment if the specified environment file exists
-if [ -f "$environment_file" ]; then
-  mamba env create -f "$environment_file"
-else
-  # Print a message if the environment file is not found
-  echo "$environment_file not found. Environment not set up."
-fi
-
 if [ -f "$environment_file" ]; then
   mamba env create -f "$environment_file"
   # Extract the environment name from the environment file
