@@ -23,8 +23,6 @@
 # Exit if any command fails
 set -e
 
-
-
 # Default values
 default_repo="https://github.com/user/repo.git"
 environment_file="environment.yml"
@@ -56,7 +54,5 @@ else
   # Print a message if the environment file is not found
   echo "$environment_file not found. Environment not set up."
 fi
-
-
 
 python -m spacy download en_core_web_sm

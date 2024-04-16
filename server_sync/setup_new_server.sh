@@ -30,25 +30,24 @@ skip_clone=false
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
   case $1 in
-    --skip-conda)
-      skip_conda=true
-      shift
-      ;;
-    --skip-clone)
-      skip_clone=true
-      shift
-      ;;
-    --environment-file)
-      environment_file="$2"
-      shift 2
-      ;;
-    *)
-      repo_path="$1"
-      shift
-      ;;
+  --skip-conda)
+    skip_conda=true
+    shift
+    ;;
+  --skip-clone)
+    skip_clone=true
+    shift
+    ;;
+  --environment-file)
+    environment_file="$2"
+    shift 2
+    ;;
+  *)
+    repo_path="$1"
+    shift
+    ;;
   esac
 done
-
 
 # Install conda if not skipped and not already installed
 if [ "$skip_conda" = false ] && ! command -v conda &>/dev/null; then
@@ -72,8 +71,6 @@ echo "Conda is installed at: ${conda_path}"
 # Print the path where conda is installed
 echo "Conda path: $conda_path"
 
-
-
 ###### Install zsh plugins
 
 # oh my zsh
@@ -91,10 +88,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 # the fuck
 pip3 install thefuck --user
-
-
-
-
 
 #### Git Config
 # TODO generalize email and user!!
