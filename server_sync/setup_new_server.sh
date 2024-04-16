@@ -12,7 +12,7 @@
 # ./setup_new_server.sh --user-email <your_email>
 
 # Exit if any command fails
-set -e
+# set -e
 
 # Default values
 skip_conda=false
