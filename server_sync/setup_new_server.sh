@@ -62,7 +62,7 @@ echo "Conda path: $conda_path"
 ###### Install zsh plugins
 
 # oh my zsh
-sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # install powerlevel10k theme
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -72,15 +72,15 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 # install fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+~/.fzf/install --key-bindings --completion --no-update-rc
 
 # Copy template_zshrc to .zshrc
-cp server_sync/template_zshrc ~/.zshrc
+cp ~/utils/server_sync/template_zshrc ~/.zshrc
 # Replace "user" with the current user
 sed -i "s/<user>/$(whoami)/g" ~/.zshrc
 
 # copy template_p10k_config to .p10k.zsh
-cp server_sync/template_p10k_config ~/.p10k.zsh
+cp ~/utils/server_sync/template_p10k_config ~/.p10k.zsh
 
 source ~/.zshrc
 
@@ -110,7 +110,3 @@ echo 'export HUGGINGFACE_HUB_CACHE=/data/home/shared/.cache/huggingface' >>~/.ba
 # source ~/.bashrc
 
 curl -fsSL https://install.julialang.org | sh
-
-# Weights and Biases
-wandb login
-# Click on url (https://wandb.ai/authorize) to authorize and paste the code in the terminal

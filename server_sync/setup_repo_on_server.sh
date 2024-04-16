@@ -68,3 +68,18 @@ else
   # Print a message if the environment file is not found
   echo "$environment_file not found. Environment not set up."
 fi
+
+if [ -f "$environment_file" ]; then
+  mamba env create -f "$environment_file"
+  # Extract the environment name from the environment file
+  env_name=$(head -n 1 "$environment_file" | cut -d ' ' -f 2)
+  # Activate the newly created environment
+  conda activate "$env_name"
+else
+  # Print a message if the environment file is not found
+  echo "$environment_file not found. Environment not set up."
+fi
+
+# Weights and Biases
+wandb login
+# Click on url (https://wandb.ai/authorize) to authorize and paste the code in the terminal
