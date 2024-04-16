@@ -1,31 +1,22 @@
 #!/bin/bash
-# This script sets up a new server by installing conda, cloning a git repository, and setting up a conda environment.
-# It takes optional command-line arguments:
-# 1. The URL of the repository to clone (default is "https://github.com/user/repo.git").
-# 2. Flag to skip downloading and installing conda (default is false).
-# 3. Flag to skip cloning the repository (default is false).
-# 4. The name of the environment file (default is "environment.yml").
-# Creates a conda environment if the specified environment file exists in the repository.
-#
+# Script Name: setup_new_server.sh
+# Description: This script sets up a new server by installing conda, configuring git, and installing various zsh plugins.
+#              It takes optional command-line arguments:
+#              1. --skip-conda: A flag to skip downloading and installing conda (default is false).
+#              2. --user-email: The user's email for git configuration.
 # Usage:
-# ./setup_new_server.sh [repo_url] [--skip-conda] [--skip-clone] [--environment-file env_file]
-#
+# ./setup_new_server.sh [--skip-conda] [--user-email user_email]
 # Examples:
 # ./setup_new_server.sh
-# ./setup_new_server.sh https://github.com/lacclab/Cognitive-State-Decoding.git
-# ./setup_new_server.sh https://github.com/lacclab/Cognitive-State-Decoding.git --skip-conda
-# ./setup_new_server.sh https://github.com/lacclab/Cognitive-State-Decoding.git --skip-clone
-# ./setup_new_server.sh https://github.com/lacclab/Cognitive-State-Decoding.git --environment-file my_env.yml
-#
-# To run the script directly from GitHub:
-# git clone https://gist.github.com/814eb6a9a8b59febbcfcc79288630b60.git code_setup && bash code_setup/setup_new_server.sh https://github.com/lacclab/Cognitive-State-Decoding.git
+# ./setup_new_server.sh --skip-conda
+# ./setup_new_server.sh --user-email <your_email>
 
 # Exit if any command fails
 set -e
 
 # Default values
 skip_conda=false
-skip_clone=false
+user_email=""
 
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
@@ -34,16 +25,11 @@ while [[ $# -gt 0 ]]; do
     skip_conda=true
     shift
     ;;
-  --skip-clone)
-    skip_clone=true
-    shift
-    ;;
-  --environment-file)
-    environment_file="$2"
+  --user-email)
+    user_email="$2"
     shift 2
     ;;
   *)
-    repo_path="$1"
     shift
     ;;
   esac
@@ -71,6 +57,11 @@ echo "Conda is installed at: ${conda_path}"
 # Print the path where conda is installed
 echo "Conda path: $conda_path"
 
+# Copy template_zshrc to .zshrc
+cp template_zshrc ~/.zshrc
+# Replace "user" with the current user
+sed -i "s/<user>/$(whoami)/g" ~/.zshrc
+
 ###### Install zsh plugins
 
 # oh my zsh
@@ -86,10 +77,36 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
+# copy template_p10k_config to .p10k.zsh
+cp template_p10k_config ~/.p10k.zsh
+
+source ~/.zshrc
+
 # the fuck
 pip3 install thefuck --user
 
 #### Git Config
-# TODO generalize email and user!!
-git config --global user.email "omer.shubi@gmail.com"
-git config --global user.name "Shubi (nlp16)"
+user=$(whoami)
+full_server_name=$(hostname)
+server_name=$(echo $full_server_name | cut -d'.' -f1)
+
+git config --global user.name "$user ($server_name)"
+
+# Check if user email is provided
+if [ -z "$user_email" ]; then
+  echo "No user email provided. Skipping git configuration."
+else
+  # Configure git with the provided user email
+  git config --global user.email "$user_email"
+fi
+
+# You should use zsh, but just in case sticking to bash use shared huggingface cache dir
+echo 'export HF_HOME=/data/home/shared/.cache/huggingface' >>~/.bashrc
+echo 'export HF_DATASETS_CACHE=/data/home/shared/.cache/huggingface' >>~/.bashrc
+echo 'export HUGGINGFACE_HUB_CACHE=/data/home/shared/.cache/huggingface' >>~/.bashrc
+# echo 'export TRANSFORMERS_CACHE=/data/home/shared/.cache/huggingface' >> ~/.bashrc # if using old hugginface transformers library
+source ~/.bashrc
+
+# Weights and Biases
+wandb login
+# Click on url (https://wandb.ai/authorize) to authorize and paste the code in the terminal
