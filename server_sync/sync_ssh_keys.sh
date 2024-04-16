@@ -1,10 +1,19 @@
 #!/bin/bash
 
-user=$(whoami)
-for i in {08..20}; do
-    rsync -avz --progress ~/.ssh/ $user@nlp$server.iem.technion.ac.il:/data/home/$user/.ssh
-done
+# Script Name: sync_ssh_keys.sh
+# Description: This script is used to synchronize SSH keys between the local machine and a set of remote servers.
+#              It uses the rsync command to perform the synchronization.
+#              The script now reads the list of servers from a file named server_list.txt.
+#              The rsync command is used with the -avzP flags to save attributes, archive, compress, and show progress during the synchronization.
+# Usage: ./sync_ssh_keys.sh
+# Author: Shubi
+# Date: 16-04-2024
 
-for i in {1..2}; do
-    rsync -avz --progress ~/.ssh/ $user@nlp-srv$server.iem.technion.ac.il:/data/home/$user/.ssh
-done
+# Get the current logged in user
+user=$(whoami)
+
+# Read each line in the server_list.txt file
+while IFS= read -r server; do
+    echo "Synchronizing SSH keys with $user@$server.iem.technion.ac.il:/data/home/$user/.ssh"
+    rsync -avzP ~/.ssh/ $user@$server.iem.technion.ac.il:/data/home/$user/.ssh
+done < server_sync/server_list.txt
