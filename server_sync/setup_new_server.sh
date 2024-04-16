@@ -93,6 +93,7 @@ full_server_name=$(hostname)
 server_name=$(echo $full_server_name | cut -d'.' -f1)
 
 git config --global user.name "$user ($server_name)"
+git config --global core.sshCommand "ssh -i ~/.ssh/server2github"
 
 # Check if user email is provided
 if [ -z "$user_email" ]; then
