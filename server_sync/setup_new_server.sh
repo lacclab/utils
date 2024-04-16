@@ -105,7 +105,9 @@ echo 'export HF_HOME=/data/home/shared/.cache/huggingface' >>~/.bashrc
 echo 'export HF_DATASETS_CACHE=/data/home/shared/.cache/huggingface' >>~/.bashrc
 echo 'export HUGGINGFACE_HUB_CACHE=/data/home/shared/.cache/huggingface' >>~/.bashrc
 # echo 'export TRANSFORMERS_CACHE=/data/home/shared/.cache/huggingface' >> ~/.bashrc # if using old hugginface transformers library
-source ~/.bashrc
+# source ~/.bashrc
+
+curl -fsSL https://install.julialang.org | sh
 
 # Weights and Biases
 wandb login
