@@ -72,6 +72,8 @@ else
   echo "$environment_file not found. Environment not set up."
 fi
 
+ln -s /data/home/shared/ ln_shared_data
+
 # Weights and Biases
 wandb login
 # Click on url (https://wandb.ai/authorize) to authorize and paste the code in the terminal

@@ -112,4 +112,4 @@ echo 'export HUGGINGFACE_HUB_CACHE=/data/home/shared/.cache/huggingface' >>~/.ba
 
 curl -fsSL https://install.julialang.org | sh
 
-ln -s /data/home/shared/ ln_shared_data
+
