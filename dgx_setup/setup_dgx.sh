@@ -61,5 +61,3 @@ else
     # Configure git with the provided user email
     git config --global user.email "$user_email"
 fi
-
-curl -fsSL https://install.julialang.org | sh
