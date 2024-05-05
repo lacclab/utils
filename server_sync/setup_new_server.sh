@@ -112,6 +112,4 @@ echo 'export HUGGINGFACE_HUB_CACHE=/data/home/shared/.cache/huggingface' >>~/.ba
 
 curl -fsSL https://install.julialang.org | sh
 
-# install vscode extensions from list (can take some time)
-cat server_sync/vscode-extensions.list | xargs -L 1 code --install-extension
-
+ln -s /data/home/shared/ ln_shared_data
