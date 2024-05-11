@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Example usage:
-# bash server_sync/run_command_all_servers.sh "cd Cognitive-State-Decoding; git checkout may-runs-shubi; git pull; mamba activate decoding; mamba env update --file environment.yml"
+# bash server_sync/run_command_all_servers.sh "cd Cognitive-State-Decoding; git checkout may-runs-shubi; git pull; source $HOME/miniforge3/etc/profile.d/conda.sh; source $HOME/miniforge3/etc/profile.d/mamba.sh; mamba activate decoding; mamba env update --file environment.yml"
 
 # Check if command is provided
 if [ -z "$1" ]; then
