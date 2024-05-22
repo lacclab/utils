@@ -16,6 +16,6 @@ user=$(whoami)
 while IFS= read -r server; do
     echo "$server:"
     (ssh $user@$server.iem.technion.ac.il "$command_to_run" &)
-    sleep 1
+    sleep 3
 done <server_sync/server_list.txt
 wait
