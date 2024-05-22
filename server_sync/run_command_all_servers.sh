@@ -14,6 +14,8 @@ user=$(whoami)
 
 # Run the command on each server listed in server_list.txt
 while IFS= read -r server; do
-    echo "Running command on $user@$server.iem.technion.ac.il"
-    ssh $user@$server.iem.technion.ac.il "$command_to_run" &
+    echo "$server:"
+    (ssh $user@$server.iem.technion.ac.il "$command_to_run" &)
+    sleep 1
 done <server_sync/server_list.txt
+wait
