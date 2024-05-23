@@ -21,6 +21,10 @@ rsync -avzP ~/.ssh/ $user@dgx-master.technion.ac.il:/home/$user/.ssh
 
 # Read each line in the server_list.txt file
 while IFS= read -r server; do
+    if [[ $server == \#* ]]; then
+        echo "Skipping server: $server"
+        continue
+    fi
     echo "Synchronizing SSH keys with $user@$server.iem.technion.ac.il:/data/home/$user/.ssh"
     rsync -avzP ~/.ssh/ $user@$server.iem.technion.ac.il:/data/home/$user/.ssh
 done < server_sync/server_list.txt

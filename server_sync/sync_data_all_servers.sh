@@ -6,12 +6,22 @@ dgx_data_path="/home/kfir-hadar/work/data/onestop/processed"
 user=$(whoami)
 
 if [ "$user" == "kfir-hadar" ]; then
+    # Skip if server starts with #
+    if [[ $server == \#* ]]; then
+        echo "Skipping server: $server"
+        continue
+    fi
     echo "Synchronizing data with dgx-master.technion.ac.il:$dgx_data_path"
     rsync -avzP $data_path/ $user@dgx-master.technion.ac.il:$dgx_data_path --exclude='*.pkl' # --include='*.tsv' --exclude='*'
     ssh $user@dgx-master.technion.ac.il "chmod -R g+rX $dgx_data_path"
 fi
 
 while IFS= read -r server; do
+    # Skip if server starts with #
+    if [[ $server == \#* ]]; then
+        echo "Skipping server: $server"
+        continue
+    fi
     echo "Synchronizing data with $user@$server.iem.technion.ac.il:$data_path"
     rsync -avzP $data_path/ $user@$server.iem.technion.ac.il:$data_path --exclude='*.pkl' # --include='*.tsv' --exclude='*'
 done <server_sync/server_list.txt

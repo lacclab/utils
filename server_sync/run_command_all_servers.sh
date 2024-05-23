@@ -14,6 +14,11 @@ user=$(whoami)
 
 # Run the command on each server listed in server_list.txt
 while IFS= read -r server; do
+    # Skip if server starts with #
+    if [[ $server == \#* ]]; then
+        echo "Skipping server: $server"
+        continue
+    fi
     echo "$server:"
     (ssh $user@$server.iem.technion.ac.il "$command_to_run" &)
     sleep 3
