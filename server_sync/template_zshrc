@@ -193,7 +193,8 @@ eval $(thefuck --alias FUCK)
 
 #source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-export HF_HOME="/data/home/shared/.cache/huggingface"
-export HF_DATASETS_CACHE="/data/home/shared/.cache/huggingface"
-export HUGGINGFACE_HUB_CACHE="/data/home/shared/.cache/huggingface"
+# handled on all servers automatically
+# export HF_HOME="/data/home/shared/.cache/huggingface"
+# export HF_DATASETS_CACHE="/data/home/shared/.cache/huggingface"
+# export HUGGINGFACE_HUB_CACHE="/data/home/shared/.cache/huggingface"
 # export TRANSFORMERS_CACHE="/data/home/shared/.cache/huggingface" # Uncomment if using old huggingface transformers library
