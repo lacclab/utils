@@ -32,4 +32,7 @@ bash server_sync/run_command_all_servers.sh "cd Cognitive-State-Decoding; git pu
 
 # Check disk space
 bash server_sync/run_command_all_servers.sh "df -h | grep /data"
+
+# Update this repo on all servers
+bash server_sync/run_command_all_servers.sh "cd utils; git pull"
 ```
