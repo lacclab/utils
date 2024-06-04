@@ -35,4 +35,7 @@ bash server_sync/run_command_all_servers.sh "df -h | grep /data"
 
 # Update this repo on all servers
 bash server_sync/run_command_all_servers.sh "cd utils; git pull"
+
+bash server_sync/run_command_all_servers.sh "cd Cognitive-State-Decoding &&  git pull &&  git checkout main &&  git pull && source ~/miniforge3/etc/profile.d/mamba.sh && mamba activate decoding &&  mamba env update --file environment.yml"
+
 ```
