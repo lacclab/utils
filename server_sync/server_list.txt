@@ -12,4 +12,3 @@ nlp18
 nlp19
 nlp20
 nlp-srv2
-nlp-srv1
