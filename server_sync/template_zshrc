@@ -165,10 +165,10 @@ else
 fi
 unset __conda_setup
 
-if [ -f "/data/home/<user>/miniforge3/etc/profile.d/mamba.sh" ]; then
-    . "/data/home/<user>/miniforge3/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
+# if [ -f "/data/home/<user>/miniforge3/etc/profile.d/mamba.sh" ]; then
+#     . "/data/home/<user>/miniforge3/etc/profile.d/mamba.sh"
+# fi
+# # <<< conda initialize <<<
 
 
 # >>> juliaup initialize >>>
@@ -187,9 +187,9 @@ esac
 export PATH="/data/home/<user>/.local/bin:$PATH"
 
 # <<< juliaup initialize <<<
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
-eval $(thefuck --alias FUCK)
+# eval $(thefuck --alias FUCK)
 
 #source ~/powerlevel10k/powerlevel10k.zsh-theme
 
